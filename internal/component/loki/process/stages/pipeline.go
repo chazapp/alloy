@@ -24,6 +24,7 @@ type StageConfig struct {
 	EventLogMessageConfig *EventLogMessageConfig `alloy:"eventlogmessage,block,optional"`
 	GeoIPConfig           *GeoIPConfig           `alloy:"geoip,block,optional"`
 	JSONConfig            *JSONConfig            `alloy:"json,block,optional"`
+	JSONDropConfig        *JSONDropConfig        `alloy:"json_drop,block,optional"`
 	LabelAllowConfig      *LabelAllowConfig      `alloy:"label_keep,block,optional"`
 	LabelDropConfig       *LabelDropConfig       `alloy:"label_drop,block,optional"`
 	LabelsConfig          *LabelsConfig          `alloy:"labels,block,optional"`

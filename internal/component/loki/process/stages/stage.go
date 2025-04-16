@@ -24,6 +24,7 @@ const (
 	StageTypeEventLogMessage    = "eventlogmessage"
 	StageTypeGeoIP              = "geoip"
 	StageTypeJSON               = "json"
+	StageTypeJSONDrop           = "json_drop"
 	StageTypeLabel              = "labels"
 	StageTypeLabelAllow         = "labelallow"
 	StageTypeLabelDrop          = "labeldrop"
@@ -145,6 +146,11 @@ func New(logger log.Logger, jobName *string, cfg StageConfig, registerer prometh
 		}
 	case cfg.JSONConfig != nil:
 		s, err = newJSONStage(logger, *cfg.JSONConfig)
+		if err != nil {
+			return nil, err
+		}
+	case cfg.JSONDropConfig != nil:
+		s, err = newJSONDropStage(logger, *cfg.JSONDropConfig)
 		if err != nil {
 			return nil, err
 		}
