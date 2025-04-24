@@ -1,0 +1,47 @@
+loki.source.file "logs" {
+  targets = [
+    { __path__ = "./sample.log" },
+  ]
+  forward_to = [ loki.process.coalesce_bug.receiver ]
+}
+
+loki.process "coalesce_bug" {
+  stage.label_drop {
+    values = [ "filename" ]
+  }
+
+  stage.json {
+    expressions = { message = "", kubernetes = "" }
+  }
+
+  stage.json {
+    source = "kubernetes"
+    expressions = {
+      app = `labels.app`,
+      app_k8s_name = `labels."app_kubernetes_io/name"`,
+      app_k8s_instance = `labels."app_kubernetes_io/instance"`,
+    }
+  }
+
+  // stage.labels {
+  //   values = {
+  //     service_name = coalesce("app", "app_k8s_name", "app_k8s_instance"),
+  //   }
+  // }
+
+  stage.labels {
+    values = {
+      service_name = "app_k8s_name",
+    }
+  }
+
+  stage.output {
+    source = "message"
+  }
+
+  forward_to = [ loki.echo.out.receiver ]
+}
+
+loki.echo "out" {
+
+}

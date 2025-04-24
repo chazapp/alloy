@@ -1,0 +1,4 @@
+{"message":"Service should be: foo","kubernetes":{"labels":{"app":"foo"}}}
+{"message":"Service should be: bar","kubernetes":{"labels":{"app_kubernetes_io/name":"bar"}}}
+{"message":"Service should be: baz","kubernetes":{"labels":{"app_kubernetes_io/instance":"baz"}}}
+{"message":"Service should be: foo","kubernetes":{"labels":{"app":"foo","app_kubernetes_io/name": "bad"}}}
