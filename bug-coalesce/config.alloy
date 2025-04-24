@@ -23,17 +23,17 @@ loki.process "coalesce_bug" {
     }
   }
 
-  // stage.labels {
-  //   values = {
-  //     service_name = coalesce("app", "app_k8s_name", "app_k8s_instance"),
-  //   }
-  // }
-
   stage.labels {
     values = {
-      service_name = "app_k8s_name",
+      service_name = coalesce("app", "app_k8s_name", "app_k8s_instance"),
     }
   }
+
+  // stage.labels {
+  //   values = {
+  //     service_name = "app_k8s_name",
+  //   }
+  // }
 
   stage.output {
     source = "message"
