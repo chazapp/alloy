@@ -29,11 +29,13 @@ loki.process "coalesce_bug" {
     }
   }
 
-  // stage.labels {
-  //   values = {
-  //     service_name = "app_k8s_name",
-  //   }
-  // }
+  stage.structured_metadata {
+    values = {
+      app = "",
+      app_k8s_name = "",
+      app_k8s_instance = "",
+    }
+  }
 
   stage.output {
     source = "message"
